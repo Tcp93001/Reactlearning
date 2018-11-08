@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import './App.css';
 import Person from './Person/Person'
 
@@ -42,8 +43,9 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'white',
+    let style = {
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -65,17 +67,22 @@ class App extends Component {
           })}
         </div>
       )
+      style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
     return (
-      <div className="App">
-        <h1>Hi! This is a react app</h1>
-        <p>This is really working!</p>
-        <button
-          style={style}
-          onClick={() => this.togglePersonsHandler('Mor')}
-        >Simple changes</button>
-      {persons}
-      </div>
+        <div className="App">
+          <h1>Hi! This is a react app</h1>
+          <p>This is really working!</p>
+          <button
+            style={style}
+            onClick={() => this.togglePersonsHandler('Mor')}
+          >Simple changes</button>
+        {persons}
+        </div>
     );
   }
 }
