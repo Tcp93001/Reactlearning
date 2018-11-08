@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import ValidationComponent from './Components/ValidationComponent';
 
 import './App.css';
+import CharComponent from './Components/CharComponent';
 
 class App extends Component {
   state = {
     inputString: ''
+  }
+
+  deleteChar = (letterIndex) => {
+    const text = this.state.inputString.split('');
+    text.splice(letterIndex, 1);
+    const updatedText = text.join('');
+    this.setState({inputString: updatedText})
   }
 
   handleInputField = (event) => {
@@ -13,6 +21,18 @@ class App extends Component {
   }
 
   render() {
+    const showChar = (
+      <div>
+        {this.state.inputString.split('').map((elem, index) => {
+          return <CharComponent
+            setLetter={elem}
+            clicked={() => this.deleteChar(index)}
+            key={index}
+          />
+        })}
+      </div>
+    );
+
     return (
       <div className="App">
         <ol>
@@ -33,6 +53,7 @@ class App extends Component {
         <ValidationComponent stringLength={this.state.inputString.length} />
         <p>Caracteres:</p>
         <p>{this.state.inputString}</p>
+        {showChar}
       </div>
 
 
